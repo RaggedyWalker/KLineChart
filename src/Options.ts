@@ -74,4 +74,9 @@ export interface Options {
   styles?: string | DeepPartial<Styles>
   customApi?: Partial<CustomApi>
   thousandsSeparator?: string
+  eventOptions?: DeepPartial<EventOptions>
+}
+
+export interface EventOptions {
+  moveStep: number
 }

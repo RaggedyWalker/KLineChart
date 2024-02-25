@@ -71,7 +71,7 @@ export default class Canvas {
         this._resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
           const entry = entries.find((entry: ResizeObserverEntry) => entry.target === this._element)
           if (isValid(entry?.devicePixelContentBoxSize?.[0])) {
-            const size = (entry!.devicePixelContentBoxSize[0])!
+            const size = (entry!.devicePixelContentBoxSize[0])
             const width = size.inlineSize
             const height = size.blockSize
             if (this._pixelWidth !== width || this._pixelHeight !== height) {

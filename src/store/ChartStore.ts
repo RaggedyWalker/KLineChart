@@ -18,7 +18,7 @@ import type VisibleData from '../common/VisibleData'
 import { getDefaultStyles, type Styles } from '../common/Styles'
 import { isArray, isString, isValid, merge } from '../common/utils/typeChecks'
 
-import { getDefaultCustomApi, type CustomApi, defaultLocale, type Options } from '../Options'
+import { getDefaultCustomApi, type CustomApi, defaultLocale, type Options, type EventOptions } from '../Options'
 
 import TimeScaleStore from './TimeScaleStore'
 import IndicatorStore from './IndicatorStore'
@@ -65,6 +65,10 @@ export default class ChartStore {
    * Data source
    */
   private _dataList: KLineData[] = []
+
+  private readonly _eventOptions: EventOptions = {
+    moveStep: 1
+  }
 
   /**
    * Time scale store
@@ -121,7 +125,7 @@ export default class ChartStore {
 
   setOptions (options?: Options): this {
     if (isValid(options)) {
-      const { locale, timezone, styles, customApi, thousandsSeparator } = options
+      const { locale, timezone, styles, customApi, thousandsSeparator, eventOptions } = options
       if (isString(locale)) {
         this._locale = locale
       }
@@ -140,6 +144,9 @@ export default class ChartStore {
       }
       if (isString(thousandsSeparator)) {
         this._thousandsSeparator = thousandsSeparator
+      }
+      if (isValid(eventOptions)) {
+        merge(this._eventOptions, eventOptions)
       }
     }
     return this
@@ -177,6 +184,10 @@ export default class ChartStore {
 
   getVisibleDataList (): VisibleData[] {
     return this._visibleDataList
+  }
+
+  getEventOptions (): EventOptions {
+    return this._eventOptions
   }
 
   addData (data: KLineData | KLineData[], pos: number, more?: boolean): void {

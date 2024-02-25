@@ -80,14 +80,16 @@ export default class Event implements EventHandler {
         }
         case 'ArrowLeft': {
           const timeScaleStore = this._chart.getChartStore().getTimeScaleStore()
+          const { moveStep } = this._chart.getChartStore().getEventOptions()
           timeScaleStore.startScroll()
-          timeScaleStore.scroll(-3 * timeScaleStore.getBarSpace().bar)
+          timeScaleStore.scroll(-moveStep * timeScaleStore.getBarSpace().bar)
           break
         }
         case 'ArrowRight': {
           const timeScaleStore = this._chart.getChartStore().getTimeScaleStore()
+          const { moveStep } = this._chart.getChartStore().getEventOptions()
           timeScaleStore.startScroll()
-          timeScaleStore.scroll(3 * timeScaleStore.getBarSpace().bar)
+          timeScaleStore.scroll(moveStep * timeScaleStore.getBarSpace().bar)
           break
         }
         default: {
